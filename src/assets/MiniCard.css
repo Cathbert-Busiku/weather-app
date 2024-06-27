@@ -1,0 +1,45 @@
+.mini-glass-card {
+    background: rgba(225, 225, 225, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 10px;
+    border: 1px solid rgba(225, 225, 225, 0.18);
+    height: 15rem;
+    width: 14rem;
+  }
+  
+  .weather-icon {
+    width: 4rem;
+    height: 4rem;
+  }
+  
+
+
+/* Media query for mobile view */
+@media (max-width: 576px) {
+    .mini-glass-card {
+      font-size: 0.8rem !important; /* Reduce font size */
+      height: 8rem;
+      width: 6rem;
+      margin-right: 5px !important;
+    }
+  
+    .weather-icon {
+      width: 2rem !important; /* Reduce icon size */
+      height: 2rem !important;
+    }
+  
+    .mini-glass-card p {
+      font-size: 0.8rem !important; /* Reduce font size for text elements */
+    }
+  
+    .mini-glass-card hr {
+      margin: 0.5rem 0 !important; /* Adjust margin for the horizontal rule */
+    }
+  }
+
+  .mini-text{
+    color: #000 !important;
+    font-weight: bolder !important;
+  }
