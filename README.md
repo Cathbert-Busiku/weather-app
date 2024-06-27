@@ -24,9 +24,12 @@ To run this application locally, follow these steps:
 
    Create a .env file in the root directory.
    Add your OpenWeatherMap API key in the .env file:
-   makefile
+  
    Copy code
-   REACT_APP_WEATHER_API_KEY=your-api-key-here
+   
+    ```bash
+        REACT_APP_WEATHER_API_KEY=your-api-key-here
+    ```
 
 4. **Run the application:**
 
