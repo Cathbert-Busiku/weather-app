@@ -42,6 +42,5 @@ To run this application locally, follow these steps:
 
 2. **Mobile View 1**: 
    ![Mobile View 1](screenshots/mobileView_1.png)
-
-3. **Mobile View 2**: 
    ![Mobile View 2](screenshots/mobileView_2.png)
+
