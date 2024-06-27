@@ -15,7 +15,7 @@ To run this application locally, follow these steps:
 
    ```
 
-2. **nstall dependencies::**
+2. **install dependencies::**
 
    cd weather-app # Navigate to the project directory
    npm install
@@ -26,7 +26,7 @@ To run this application locally, follow these steps:
    Add your OpenWeatherMap API key in the .env file:
   
    Copy code
-   
+
     ```bash
         REACT_APP_WEATHER_API_KEY=your-api-key-here
     ```
