@@ -63,15 +63,3 @@
   line-height: 2.25rem;
 }
 
-a{
-  text-decoration: none;
-}
-
-.text-select{
-  color: black !important;
-}
-
-
-.nav-click:hover {
-  cursor: pointer;
-}

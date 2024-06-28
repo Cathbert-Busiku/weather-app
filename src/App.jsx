@@ -1,117 +1,40 @@
-import { useState } from 'react';
-import './App.css';  
-import search from './assets/icons/search.svg';  
-import { useStateContext } from './Context';  
-import { BackgroundLayout, WeatherCard, MiniCard, TodayWeather } from './Components';  
-import 'bootstrap/dist/css/bootstrap.min.css'; 
+import { useState } from "react";
+import { BrowserRouter as Router, Route, Routes, Navigate, useLocation } from "react-router-dom"; 
+import Navbar from "./Components/Navbar"; 
+import WeatherNavbar from "./Components/WeatherNavbar"; 
+import NewsBoard from "./Components/NewsBoard"; 
+import './App.css'; 
+import WeatherApp from './WeatherApp'; 
 
-function App() {
-    const [input, setInput] = useState('');  
-    // Destructuring state from context
-    const { weather, thisLocation, values, place, setPlace } = useStateContext();  
+const App = () => {
+  const [category, setCategory] = useState('general'); 
+  const [country, setCountry] = useState('us'); 
+  const [input, setInput] = useState(''); 
 
-    const submitCity = () => {
-        setPlace(input);  
-        setInput('');
-    };
+  const location = useLocation(); 
 
-    const today = new Date().toISOString().split('T')[0];  // Getting today's date in ISO format
-
-    // Filter data for a specific time each day, e.g., 12:00:00
-    const filteredValues = values.filter(curr => curr.dt_txt.includes('12:00:00'));
-
-    // Filter data for today's weather
-    const todayWeather = values.filter(curr => curr.dt_txt.startsWith(today));
-
-    return (
-        <div className="container-fluid text-white">
-            {/* Navigation bar */}
-            <nav className="navbar navbar-expand-lg">
-                <div className="container-fluid">
-                    <div className='card  bg-gradient-ibiza'>
-                        <h1 className="navbar-brand font-bold text-color tracking-wide m-2">Weather App</h1>
-                    </div>
-                    {/* Search input */}
-                    <div className="input-group w-25">
-                        <input
-                            type="text"
-                            className="form-control bg-gradient-scooter"
-                            placeholder="Search city"
-                            aria-label="Search city"
-                            value={input}
-                            onChange={(e) => setInput(e.target.value)}
-                            onKeyUp={(e) => {
-                                if (e.key === 'Enter') {
-                                    submitCity();
-                                }
-                            }}
-                        />
-                        <button className="btn btn-outline-secondary" type="button" onClick={submitCity}>
-                            <img src={search} alt="search" className="img-fluid" />
-                        </button>
-                    </div>
-                </div>
-            </nav>
-
-            {/* Background image based on weather */}
-            <BackgroundLayout />
-
-            {/* Main content */}
-            <main className="row justify-content-center">
-                {/* Current weather card */}
-                <div className='col-xl-4 col-md-6 col-sm-12'>
-                    {weather && weather.wind && weather.main && weather.weather && (
-                        <WeatherCard
-                            place={thisLocation}
-                            windspeed={weather.wind.speed}
-                            humidity={weather.main.humidity}
-                            temperature={weather.main.temp}
-                            heatIndex={weather.main.feels_like}
-                            iconString={weather.weather[0].description}
-                            conditions={weather.weather[0].description}
-                        />
-                    )}
-                </div>
-
-                {/* Today's weather cards */}
-                <div className="col-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
-                    <div className="container-fluid">
-                        <div className="row d-flex justify-content-center">
-                            {todayWeather.map((curr) => (
-                                <div key={curr.dt_txt} className="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 mb-2">
-                                    <TodayWeather
-                                        time={curr.dt_txt}
-                                        temp={curr.main.temp}
-                                        iconString={curr.weather[0].description}
-                                    />
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </div>
-            </main>
-
-            {/* Weekly weather cards */}
-            <div className="container-fluid mb-5">
-                <div className='d-flex justify-content-center'>
-                    <div className='card  bg-gradient-ibiza m-4'>
-                        <h1 className="navbar-brand font-bold text-color tracking-wide m-3">Weather For The Week</h1>
-                    </div>
-                </div>
-                <div className="row d-flex justify-content-center">
-                    {filteredValues.map((curr) => (
-                        <div key={curr.dt_txt} className="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 mb-2">
-                            <MiniCard
-                                time={curr.dt_txt}
-                                temp={curr.main.temp}
-                                iconString={curr.weather[0].description}
-                            />
-                        </div>
-                    ))}
-                </div>
-            </div>
-        </div>
-    );
+  return (
+    <div>
+      {location.pathname.startsWith('/weather') ? (
+        // Render WeatherNavbar if the current path starts with '/weather'
+        <WeatherNavbar setCategory={setCategory} setCountry={setCountry} />
+      ) : (
+        // Render Navbar for other paths
+        <Navbar setCategory={setCategory} setCountry={setCountry} setInput={setInput} />
+      )}
+      <Routes>
+        <Route path="/" element={<Navigate to="/general/us" replace />} /> {/* Redirect from root to /general/us */}
+        <Route path="/:category/:country" element={<NewsBoard />} /> {/* Dynamic route for category and country */}
+        <Route path="/weather" element={<WeatherApp input={input} />} /> {/* Route for WeatherApp component */}
+      </Routes>
+    </div>
+  );
 }
 
-export default App;
+const AppWrapper = () => (
+  <Router>
+    <App /> {/* Wrap App component in Router */}
+  </Router>
+);
+
+export default AppWrapper;
