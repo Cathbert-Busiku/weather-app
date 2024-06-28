@@ -20,7 +20,7 @@
 @media (max-width: 576px) {
     .mini-glass-card {
       font-size: 0.8rem !important; /* Reduce font size */
-      height: 8rem;
+      height: 10rem;
       width: 6rem;
       margin-right: 5px !important;
     }
