@@ -75,3 +75,7 @@ a{
 .nav-click:hover {
   cursor: pointer;
 }
+
+.bg-gray{
+  background-color: lightgray;
+}

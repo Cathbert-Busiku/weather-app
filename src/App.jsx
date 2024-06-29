@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes, Navigate, useLocation } from "r
 import Navbar from "./Components/Navbar"; 
 import WeatherNavbar from "./Components/WeatherNavbar"; 
 import NewsBoard from "./Components/NewsBoard"; 
+import Footer from "./Components/Footer"; 
 import './App.css'; 
 import WeatherApp from './WeatherApp'; 
 
@@ -27,6 +28,7 @@ const App = () => {
         <Route path="/:category/:country" element={<NewsBoard />} /> {/* Dynamic route for category and country */}
         <Route path="/weather" element={<WeatherApp input={input} />} /> {/* Route for WeatherApp component */}
       </Routes>
+      <Footer />
     </div>
   );
 }
